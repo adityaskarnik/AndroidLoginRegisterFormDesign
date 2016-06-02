@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
 import java.util.ArrayList;
@@ -69,9 +70,18 @@ public class ActivityLogin extends AppCompatActivity implements LoaderCallbacks<
             }
         });
         ImageView imageView = (ImageView) findViewById(R.id.image1);
-        Glide.with(this)
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+        Glide.with(this).load(R.raw.image).into(imageViewTarget);
+        /*Glide.with(this)
                 .load("https://goo.gl/LORnV7")
-                .into(imageView);
+                .into(imageView);*/
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityLogin.this,FullImage.class);
+                startActivity(i);
+            }
+        });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.sign_in_button);
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
